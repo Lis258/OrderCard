@@ -46,4 +46,14 @@ public class OrderCardTest {
         $(".input_invalid[data-test-id=phone] .input__sub").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
+    @Test
+    void shouldSubmitRequestNoAgreement() {
+        open("http://localhost:9999");
+        $("[data-test-id = name] input").setValue("Иванов Иван");
+        $("[data-test-id = phone] input").setValue("+79001236987");
+        $("[type = button]").click();
+        $(".input_invalid[data-test-id=agreement] .checkbox__text").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй"));
+    }
+
+
 }
