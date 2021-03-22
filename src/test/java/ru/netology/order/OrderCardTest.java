@@ -18,12 +18,21 @@ public class OrderCardTest {
     }
 
     @Test
-    void shouldSubmitRequestNoData() {
+    void shouldSubmitRequestNoName() {
         open("http://localhost:9999");
-        $("[data-test-id = name] input").setValue("");
-        $("[data-test-id = phone] input").setValue("");
+        $("[data-test-id = phone] input").setValue("+79001236987");
+        $("[data-test-id = agreement]").click();
         $("[type = button]").click();
         $(".input_invalid[data-test-id=name] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void shouldSubmitRequestNoPhone() {
+        open("http://localhost:9999");
+        $("[data-test-id = name] input").setValue("Иванов Иван");
+        $("[data-test-id = agreement]").click();
+        $("[type = button]").click();
+        $(".input_invalid[data-test-id=phone] .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
     }
 
     @Test
